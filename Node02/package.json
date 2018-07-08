@@ -1,0 +1,22 @@
+{
+  "name": "Node02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.export-demo.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bufferhelper": "^0.2.1",
+    "cheerio": "^1.0.0-rc.2",
+    "iconv-lite": "^0.4.23",
+    "request": "^2.87.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
