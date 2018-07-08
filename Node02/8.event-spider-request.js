@@ -29,7 +29,7 @@ class MyEventEmitter extends EventEmitter {
                 console.log('error', error.message);
                 return
             }
-            //讲拿到的html代码转码
+            //把拿到的html代码转码
             let html = iconv.decode(body, 'gb2312');
 
             // console.log(html)
@@ -82,45 +82,5 @@ class MyEventEmitter extends EventEmitter {
 let myEventEmitter = new MyEventEmitter();
 myEventEmitter.start();
 
-
-// myEventEmitter.on(startLoadHtml, () => {
-//
-//     var options = {
-//         url: baseUrl,
-//         encoding: null,
-//     }
-//
-//     request(options, (error, response, body) => {
-//         //print statusCode
-//         console.log('statusCode', response && response.statusCode);
-//         if (error) {
-//             //print error message
-//             console.log('error', error.message);
-//             return
-//         }
-//         let html = iconv.decode(body, 'gb2312');
-//
-//         // console.log(html)
-//         myEventEmitter.emit(getHtmlFinish, html);
-//
-//     });
-// })
-//注册获取到转码后的网页的事件
-// myEventEmitter.on(getHtmlFinish, (html) => {
-//     let $ = cheerio.load(html);
-//     let array = $('div.MeinvTuPianBox>ul>li>a>i>img').toArray();
-//     let imgData = [];
-//     for (let i = 0; i < array.length; i++) {
-//         let imgObj = array[i];
-//         let src = $(imgObj).attr('src');
-//         let alt = $(imgObj).attr('alt');
-//         // console.log(`src: ${src} alt:${alt}`)
-//         imgData.push({
-//             src, alt
-//         })
-//     }
-//     myEventEmitter.emit(downloadImage, imgData);
-//     // return imgData
-// })
 
 
