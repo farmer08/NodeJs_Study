@@ -1,4 +1,4 @@
-let UserService = require('../model/user');
+let User = require('../model/user');
 let crypto = require('lxj-crypto');
 let config = require('../config')
 
@@ -10,7 +10,7 @@ let config = require('../config')
 async function getUserInfo(username) {
     console.log('params :'+username);
     //查询用户的信息，返回不包含password和__v字段
-    let result = await UserService.findOne({username: username}).select("-__v -password");
+    let result = await User.findOne({username: username}).select("-__v -password");
     if (!result) {
         throw  Error(`用户名为${user.username}的用户不存在`);
     }
@@ -19,7 +19,7 @@ async function getUserInfo(username) {
 }
 
 async function isUserExist(username) {
-    let res = await UserService.findOne({username: username});
+    let res = await User.findOne({username: username});
     if (!res) {
         throw Error(`用户名为${username}的用户不存在`)
     }
@@ -34,7 +34,7 @@ async function deleteUser(username) {
     console.log("delete params:"+username)
     await  isUserExist(username);
     // res: {n:1, mModify:1, ok: 1}
-    let result = await UserService.deleteOne({username: username});
+    let result = await User.deleteOne({username: username});
     console.log('delete result:'+result)
     if (result.n < 1) {
         throw  Error('删除失败');
@@ -57,7 +57,7 @@ async function loginUser(user) {
 
     //2根据用户名和密码去数据查询用户是否存在
 
-    let dbuser = await UserService.findOne({username: user.username, password: user.password})
+    let dbuser = await User.findOne({username: user.username, password: user.password})
     if (!dbuser) {
         throw Error('用户名或者密码错误')
     }
@@ -76,7 +76,7 @@ async function loginUser(user) {
  * @returns {Promise<user|*>}
  */
 async function registerUser(user) {
-    let result = await UserService.findOne({username: user.username});
+    let result = await User.findOne({username: user.username});
     if (result) {
         throw Error(`用户名为${user.username}的用户已经存在`);
     }
@@ -87,7 +87,7 @@ async function registerUser(user) {
     user.create = Date.now() + 60 * 60 * 8;//中国标准时间为东八区，需要UTC时间+8个小时
 
     // 存库操作
-    let createResult = await UserService.create(user);
+    let createResult = await User.create(user);
     if (createResult) {
         createResult.password = '';//注册成功返回数据里面不包含password
         return "注册成功";
