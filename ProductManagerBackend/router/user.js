@@ -3,8 +3,8 @@ let userService = require('../service/user-service');
 /**
  * 获取用户信息
  */
-router.get('/:username', async (req, res) => {
-    let result = await userService.getUserInfo(req.params.username);
+router.get('/', async (req, res) => {
+    let result = await userService.getUserInfo(req.query.username);
     res.success(result)
 
 });

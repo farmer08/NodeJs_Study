@@ -1,5 +1,6 @@
 require('express-async-errors');//必须放在最前面
 let morgan = require('morgan');
+require('./db')
 let bodyParser = require('body-parser');
 let express = require('express');
 let config = require('./config/index');

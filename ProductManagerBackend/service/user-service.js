@@ -8,6 +8,7 @@ let config = require('../config')
  * @returns {Promise<*>}
  */
 async function getUserInfo(username) {
+    console.log('params :'+username);
     //查询用户的信息，返回不包含password和__v字段
     let result = await UserService.findOne({username: username}).select("-__v -password");
     if (!result) {

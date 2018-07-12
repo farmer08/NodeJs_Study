@@ -2,7 +2,7 @@ require('../db')
 let userSevice = require('../service/user-service');
 
 async function testGetUserInfo() {
-    let result = await userSevice.getUserInfo('bitcoin');
+    let result = await userSevice.getUserInfo('nodejs');
     console.log(result);
 
 }
