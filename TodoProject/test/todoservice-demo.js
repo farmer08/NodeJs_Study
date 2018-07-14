@@ -11,7 +11,7 @@ async function testGetAllTodos() {
 
 async function testAddTodo() {
     let todo = {
-        content: '今天学什么'
+        content: '测试时间'
     };
 
     let result = await todoService.addTodo(todo);
@@ -38,8 +38,8 @@ async function testDelete() {
 }
 
 // testUpdate();
-// testAddTodo();
+testAddTodo();
 // testGetAllTodos();
-testDelete();
+// testDelete();
 
 

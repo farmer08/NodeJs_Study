@@ -5,6 +5,7 @@ let userService = require('../service/user-service');
  */
 router.get('/', async (req, res) => {
     let result = await userService.getUserInfo(req.query.username);
+    console.log(result)
     res.success(result)
 
 });

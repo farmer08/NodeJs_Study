@@ -13,6 +13,8 @@ async function addTodo(todo) {
     if(res){
         throw Error(`内容为:${todo.content}已经存在`);
     }
+    console.log('time:'+Date.now())
+    
     return await Todo.create(todo);
 }
 //判断id是否存在

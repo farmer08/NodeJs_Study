@@ -17,7 +17,7 @@ async function testUserRegist() {
         username: 'nodejs',
         password: '123456',
         age: 10,
-        role: 1000
+        role: 100
     }
     let result = await userSevice.registerUser(user)
     console.log(result);
@@ -34,6 +34,14 @@ async function testLogin() {
     console.log(loginData)
 }
 
+async function testUpdateUerRole() {
+    let params = {
+        username: 'bitcoin',
+        role: '100'
+    }
+    let loginData = await userSevice.updateRoleUser(params);
+    console.log(loginData)
+}
 /**
  * 测试删除方法
  * @returns {Promise<void>}
@@ -43,7 +51,8 @@ async function testDeleteRegist() {
     console.log(result);
 
 }
+testUpdateUerRole();
 // testLogin();
 // testDeleteRegist();
 // testUserRegist();
-testGetUserInfo();
+// testGetUserInfo();

@@ -8,13 +8,13 @@ let config = require('../config')
  * @returns {Promise<*>}
  */
 async function getUserInfo(username) {
-    console.log('params :'+username);
+    // console.log('params :' + username);
     //查询用户的信息，返回不包含password和__v字段
     let result = await User.findOne({username: username}).select("-__v -password");
     if (!result) {
         throw  Error(`用户名为${user.username}的用户不存在`);
     }
-    console.log('service:'+result)
+    // console.log('service:' + result)
     return result;
 }
 
@@ -26,16 +26,32 @@ async function isUserExist(username) {
 }
 
 /**
+ * 更新用户的role
+ * @param username
+ * @returns {Promise<void>}
+ */
+async function updateRoleUser(params) {
+    await  isUserExist(params.username);
+    // res: {n:1, mModify:1, ok: 1}
+    let result = await User.updateOne({username: params.username}, {role: params.role});
+    console.log('updateRoleUser result:' + result)
+    if (result.n < 1) {
+        throw  Error('更新失败');
+    }
+    return `更新${params.username}的role成功`;
+}
+
+/**
  * 删除用户
  * @param username
  * @returns {Promise<void>}
  */
 async function deleteUser(username) {
-    console.log("delete params:"+username)
+    console.log("delete params:" + username)
     await  isUserExist(username);
     // res: {n:1, mModify:1, ok: 1}
     let result = await User.deleteOne({username: username});
-    console.log('delete result:'+result)
+    console.log('delete result:' + result)
     if (result.n < 1) {
         throw  Error('删除失败');
     }
@@ -48,8 +64,8 @@ async function deleteUser(username) {
  * @returns {Promise<void>}
  */
 async function loginUser(user) {
-    console.log("username:"+user.username)
-    console.log("password:"+user.password)
+    console.log("username:" + user.username)
+    console.log("password:" + user.password)
     //1 首先对密码加密，数据库不存储明文密码
 
     user.password = crypto.sha1Hmac(user.password, user.username);
@@ -101,5 +117,6 @@ module.exports = {
     registerUser,
     getUserInfo,
     deleteUser,
-    loginUser
+    loginUser,
+    updateRoleUser
 }
